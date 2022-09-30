@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+
+.Trash:hover {
+    color: rgb(235, 107, 84);
+
+}
+
+.Edit:hover {
+    color: #619e9e;
+}
+
+.Plus {
+    color: #2d1c56;
+    cursor: pointer;
+
+}
+
+.Plus:hover {
+    color: #6c5b99;
+    transition: 0.1s;
+}
