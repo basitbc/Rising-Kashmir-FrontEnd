@@ -48,7 +48,7 @@ const Location = () => {
     .then((res)=>{
       setLocations(res.data);
     })
-  },[location]); 
+  },[]); 
 
 
   //  Functions For handling Delete Dialog 

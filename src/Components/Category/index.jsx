@@ -16,34 +16,36 @@ const Category = () => {
   const [openUpdateDialog, setOpenUpdateDialog] = useState(false)
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
+  
   const addCategory=(e)=>{
     e.preventDefault()
     const newcategory = {"categoryName": category};
-    CategoryService.addCategory(newcategory).catch((e)=>console.log(e, "addError"));;
+    CategoryService.addCategory(newcategory).then((e)=>{getdata()});
     setOpenAddDialog(false);
   }
-
 const deleteCategory=(id)=>{
   try {
-    CategoryService.deleteCategory(id);
+    CategoryService.deleteCategory(id).then((e)=>{getdata()});
   } catch (error) {
     console.log(error);
   }
 }
-
 const updateCategory=(categoryId, categoryName)=>{
-  CategoryService.updateCategory(categoryId, categoryName);
-  setOpenAddDialog(false);
+  CategoryService.updateCategory(categoryId, categoryName)
+  .then((e)=>{getdata()})
+  .then((e)=>{setOpenAddDialog(false)});
   
 }
-
-
-  useEffect(() => {
-    CategoryService.getCategories()
+ const getdata = ()=>{
+  CategoryService.getCategories()
     .then((result)=>{
       setCategories(result.data);
     })
-  },[category]);
+ }
+
+  useEffect(() => {
+    getdata();
+  },[]);
   
 
   const handleClickOpen = () => {
