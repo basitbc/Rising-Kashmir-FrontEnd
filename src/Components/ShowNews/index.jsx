@@ -9,8 +9,14 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import ShowNewsServices from '../../Services/ShowNewsServices';
 import { useState, useEffect } from 'react';
-import { Grid} from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Fab, Grid, TextField, Typography} from '@mui/material';
 import { Link } from 'react-router-dom';
+import Actions from '../Actions';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { TextFields } from '@mui/icons-material';
+import UpdateDialog from '../UpdateDialog';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -32,17 +38,33 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-
 export default function ShowNews({selectedNews}) {
     const [news, setNews] = useState([]);
+    const [newsToUpdate, setNewstoUpdate] = useState([]);
+    const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
     
     useEffect(() => {
-        ShowNewsServices.getAllNews()
-        .then((res)=>{
+       getallnewss()
+      },[newsToUpdate]);
+      
+      const getallnewss=(()=>{
+        ShowNewsServices.getAllNews().then((res)=>{
           setNews(res.data);
         })
-      },[]);
-      
+      });
+
+      const DeleteNews=((newsId)=>{
+        ShowNewsServices.deleteNews(newsId).then((e)=>{
+          getallnewss();
+        })
+    })
+    
+
+    const UpdateNews=((news1)=>{
+      setNewstoUpdate(news1);
+      setOpenUpdateDialog(true);
+    })
+
 
       
 
@@ -53,40 +75,61 @@ export default function ShowNews({selectedNews}) {
       <Table sx={{ minWidth: 900 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Id</StyledTableCell>
-            <StyledTableCell >Title</StyledTableCell>
-            <StyledTableCell >Details</StyledTableCell>
-            <StyledTableCell align="right">Location</StyledTableCell>
-            <StyledTableCell align="right">Actions</StyledTableCell>
+            <StyledTableCell sx={{fontWeight:"900"}}>Id</StyledTableCell>
+            <StyledTableCell sx={{fontWeight:"900"}}>Title</StyledTableCell>
+            <StyledTableCell sx={{fontWeight:"900"}}>Details</StyledTableCell>
+            <StyledTableCell sx={{fontWeight:"900"}} >Location</StyledTableCell>
+            <StyledTableCell sx={{fontWeight:"900"}}align='center' >Actions</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
 
             {news.map(news1=>{
               if(news1.categoryId===selectedNews){
-                return(<StyledTableRow key={news1.newsId}>
-                  <StyledTableCell>
+                return(
+                <StyledTableRow key={news1.newsId}>
+                  <StyledTableCell sx={{fontWeight:"900"}}>
                     {news1.newsId}
                   </StyledTableCell>
-                  <StyledTableCell component="th" scope="row">{news1.newsTitle}</StyledTableCell>
+                  <StyledTableCell component="th" scope="row" sx={{fontWeight:"900", color:"purple"}}>{news1.newsTitle}</StyledTableCell>
                   <StyledTableCell>{news1.newsDetails}</StyledTableCell>
-                  <StyledTableCell align="right">{news1.location.locationName}</StyledTableCell>
-                  <StyledTableCell align="right">Actions</StyledTableCell>
+                  <StyledTableCell sx={{fontWeight:"900", color:"green"}}>{news1.location.locationName}</StyledTableCell>
+                  <StyledTableCell align='center' >
+                  </StyledTableCell>
+                </StyledTableRow> )
+              }
+              else if(selectedNews==="-1"){
+                return(
+                <StyledTableRow key={news1.newsId}>
+                  <StyledTableCell sx={{fontWeight:"900"}}>{news1.newsId} </StyledTableCell>
+                  <StyledTableCell sx={{fontWeight:"900", color:"purple"}} component="th" scope="row">{news1.newsTitle}</StyledTableCell>
+                  <StyledTableCell>{news1.newsDetails}</StyledTableCell>
+                  <StyledTableCell sx={{fontWeight:"900", color:"green"}}>{news1.location.locationName}</StyledTableCell>
+                  <StyledTableCell align="center">
+                  <Grid container spacing={2} display={"flex"} flexDirection="row" wrap='nowrap' >
+                   <Fab  onClick={()=>{DeleteNews(news1)}} size='small' color="primary" aria-label="add"  sx={{marginRight:"4px"}}>
+                     <DeleteIcon  />
+                      </Fab>
+                        <Fab onClick={()=>{UpdateNews(news1)}} size='small' color="secondary" aria-label="edit" sx={{marginRight:"4px"}}>
+                        <EditIcon  />
+                          </Fab>
+                        <Fab size='small' aria-label="like" sx={{marginRight:"4px"}}>
+                          <FavoriteIcon />
+                          </Fab>
+                           </Grid>
+                  </StyledTableCell>
                 </StyledTableRow> )
               }
               return(
                ""
               )
             })
-
             }
+
         </TableBody>
       </Table>
     </TableContainer>
-
-    <Link to="/addNews" state={{selectedNews : selectedNews}} >
-          <button >Add News in</button>
-        </Link>
+    <UpdateDialog openUpdateDialog={openUpdateDialog} setOpenUpdateDialog={setOpenUpdateDialog} newsToUpdate={newsToUpdate} />
     </Grid>
   );
 }

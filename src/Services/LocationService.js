@@ -10,6 +10,12 @@ class LocationService {
         return axios.get(`${LOCATION_API_BASE_URL}/get-all-locations`);
     }
 
+    getLocById(Id){
+        console.log(Id, "AXIOS ID");
+        return axios.get(`${LOCATION_API_BASE_URL}/getbyid`+ "/" + Id);
+        
+    }
+
     addLocation(location){
         return axios.post(`${LOCATION_API_BASE_URL}/save`,location);
     }

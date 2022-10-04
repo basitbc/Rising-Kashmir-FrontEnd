@@ -34,11 +34,7 @@ const Location = () => {
   }
 
   const deleteLocation=(id)=>{
-    try {
-      LocationService.deleteLocation(id);
-    } catch (error) {
-      console.log(error);
-    }
+      return LocationService.deleteLocation(id);
   }
   
   

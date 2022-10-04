@@ -3,7 +3,7 @@ import axios from "axios";
 const NEWS_API_BASE_URL = "http://localhost:8081/risingkashmir/news-table";
 
 
-class CategoryService {
+class ShowNewsService {
   
     getAllNews(){
         return axios.get(`${NEWS_API_BASE_URL}/get-all-News`);
@@ -13,13 +13,15 @@ class CategoryService {
         return axios.post(`${NEWS_API_BASE_URL}/save`, News);
     }
 
-    // deleteNews(News){
-    //     return axios.delete(`${NEWS_API_BASE_URL}/delete` + "/" + NewsId)
-    // }
+    deleteNews(NewsId){
+        return axios.delete(`${NEWS_API_BASE_URL}/delete` + "/" + NewsId);
+    }
 
-    // updateNews(newsId, news){
-    //     return axios.put(`${NEWS_API_BASE_URL}/update`+ "/" + newsId, {NewsName: news});
-    // }
+    updateNews(newsId, news){
+        console.log(newsId, "API");
+        console.log(news,"Api")
+        return axios.put(`${NEWS_API_BASE_URL}/update`+ "/" + newsId, news);
+    }
 }
 
-export default new CategoryService();
+export default new ShowNewsService();

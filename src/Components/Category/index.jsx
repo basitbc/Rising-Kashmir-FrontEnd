@@ -7,12 +7,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrash } from '@fortawesome/fontawesome-free-solid'
 import CategoryService from '../../Services/CategoryService'
 import ShowNews from '../ShowNews'
+import { Link } from 'react-router-dom'
 
 
 const Category = () => {
   const [openAddDialog, setOpenAddDialog] = useState(false);
   const [catg, setCatg] = useState({});
-  const [selectedNews, setSelectedNews] = useState("2");
+  const [selectedNews, setSelectedNews] = useState("-1");
   const [openUpdateDialog, setOpenUpdateDialog] = useState(false)
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
@@ -87,6 +88,19 @@ const updateCategory=(categoryId, categoryName)=>{
         
         <Grid container sx={{overflowX:"scroll"}} height="150px" backgroundColor="#F7CAC9">
     <Stack m={2} gap={2} direction="row" justifyContent="start" >
+    <Card  key={catg.categoryId} sx={{backgroundColor:"#6B5B95", minWidth:"250px", height:"100px"}}>
+          <CardContent>
+              <Button onClick={() => setSelectedNews("-1")} className='textCategories' color={"whitesmoke"} fontFamily={'Ubuntu'}  variant='h5'>
+                  All News
+              </Button>
+              <br/>
+              <Link to="/addNews" >
+              <Button variant='contained'>
+                Add News
+              </Button>
+              </Link>
+          </CardContent>
+      </Card>
         {categories.map(catg=>(
           <Card  key={catg.categoryId} sx={{backgroundColor:"#6B5B95", minWidth:"250px", height:"100px"}}>
           <CardContent>
