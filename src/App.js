@@ -15,11 +15,13 @@ function App() {
    <Navbar />
    <Routes>
    <Route exact path='/' element={<Main/>}/>
-    <Route path='/locations' element={<Location/>}/>
-    <Route path='/categories' element={<Category />}/>
-    <Route path='/addnews' element={<AddNews />}/>
+    
     <Route path='/loginpage' element={<LoginPage/>}/>
-    <Route path="/loginpage/adminpanel" element={<AdminPanel/>}/>
+    <Route path='addnews' element={<AddNews />}/>
+    <Route path="/admin" element={<AdminPanel/>}>
+        <Route path='categories' element={<Category />}/>
+        <Route path='locations' element={<Location/>}/>   
+    </Route>
     
     
     

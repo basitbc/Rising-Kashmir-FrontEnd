@@ -1,23 +1,38 @@
+import { Button, Grid } from '@mui/material'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 
 const AdminPanel = () => {
   return (
     <>
-    
-    <Link>
-    <button to="/categories">
+    <Grid container sx={{width:"100vw",
+     height:"100vh",
+      backgroundColor:"#F0FFFF",
+       display:"flex", 
+       justifyContent:"center", 
+       alignItems:"center",
+       flexDirection:"column"
+       }} >
+        <Grid item >
+        <Link to="categories">
+    <Button variant="contained">
         News Categories
-    </button>
+    </Button>
     </Link>
-    <Link>
-    <button to="/locations">
+        </Grid>
+    <Grid item >
+    <Link to="locations">
+    <Button variant="contained" >
         News Locations
-    </button>
+    </Button>
     </Link>
+    </Grid>
+    </Grid>
     
+    <Outlet/>
     </>
+    
   )
 }
 

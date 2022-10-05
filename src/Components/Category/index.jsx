@@ -88,7 +88,7 @@ const updateCategory=(categoryId, categoryName)=>{
         
         <Grid container sx={{overflowX:"scroll"}} height="150px" backgroundColor="#F7CAC9">
     <Stack m={2} gap={2} direction="row" justifyContent="start" >
-    <Card  key={catg.categoryId} sx={{backgroundColor:"#6B5B95", minWidth:"250px", height:"100px"}}>
+    <Card key={catg.categoryId} sx={{backgroundColor:"#6B5B95", minWidth:"250px", height:"100px"}}>
           <CardContent>
               <Button onClick={() => setSelectedNews("-1")} className='textCategories' color={"whitesmoke"} fontFamily={'Ubuntu'}  variant='h5'>
                   All News

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
+import "./index.css"
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -9,14 +10,16 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import ShowNewsServices from '../../Services/ShowNewsServices';
 import { useState, useEffect } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Fab, Grid, TextField, Typography} from '@mui/material';
-import { Link } from 'react-router-dom';
-import Actions from '../Actions';
+import { Fab, Grid} from '@mui/material';
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { TextFields } from '@mui/icons-material';
+
 import UpdateDialog from '../UpdateDialog';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { Link } from 'react-router-dom';
+import ShowNewsDialog from '../ShowNewsDialog';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -42,6 +45,7 @@ export default function ShowNews({selectedNews}) {
     const [news, setNews] = useState([]);
     const [newsToUpdate, setNewstoUpdate] = useState([]);
     const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
+    const [openShowDialog, setOpenShowDialog] = useState(false);
     
     useEffect(() => {
        getallnewss()
@@ -63,6 +67,12 @@ export default function ShowNews({selectedNews}) {
     const UpdateNews=((news1)=>{
       setNewstoUpdate(news1);
       setOpenUpdateDialog(true);
+    })
+
+    const ShowNews1=((news1)=>{
+      setNewstoUpdate(news1);
+      setOpenShowDialog(true);
+      console.log(news1, "News Showed")
     })
 
 
@@ -95,6 +105,9 @@ export default function ShowNews({selectedNews}) {
                   <StyledTableCell>{news1.newsDetails}</StyledTableCell>
                   <StyledTableCell sx={{fontWeight:"900", color:"green"}}>{news1.location.locationName}</StyledTableCell>
                   <StyledTableCell align='center' >
+                  <Fab onClick={()=>{ShowNews1(news1)}} size='small' color="primary" aria-label="add"  sx={{marginRight:"4px"}}>
+                     <RemoveRedEyeIcon  />
+                      </Fab>
                   </StyledTableCell>
                 </StyledTableRow> )
               }
@@ -102,7 +115,9 @@ export default function ShowNews({selectedNews}) {
                 return(
                 <StyledTableRow key={news1.newsId}>
                   <StyledTableCell sx={{fontWeight:"900"}}>{news1.newsId} </StyledTableCell>
-                  <StyledTableCell sx={{fontWeight:"900", color:"purple"}} component="th" scope="row">{news1.newsTitle}</StyledTableCell>
+                  <StyledTableCell sx={{fontWeight:"900", color:"purple"}} component="th" scope="row">
+                  <Link href="#" onClick={()=>{ShowNews1(news1)}} className='Link' >
+                    {news1.newsTitle}</Link></StyledTableCell>
                   <StyledTableCell>{news1.newsDetails}</StyledTableCell>
                   <StyledTableCell sx={{fontWeight:"900", color:"green"}}>{news1.location.locationName}</StyledTableCell>
                   <StyledTableCell align="center">
@@ -117,6 +132,7 @@ export default function ShowNews({selectedNews}) {
                           <FavoriteIcon />
                           </Fab>
                            </Grid>
+                           
                   </StyledTableCell>
                 </StyledTableRow> )
               }
@@ -130,6 +146,8 @@ export default function ShowNews({selectedNews}) {
       </Table>
     </TableContainer>
     <UpdateDialog openUpdateDialog={openUpdateDialog} setOpenUpdateDialog={setOpenUpdateDialog} newsToUpdate={newsToUpdate} />
+    <ShowNewsDialog newsToUpdate={newsToUpdate} openShowDialog={openShowDialog} setOpenShowDialog={setOpenShowDialog}/>
+    
     </Grid>
   );
 }

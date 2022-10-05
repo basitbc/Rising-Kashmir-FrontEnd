@@ -23,7 +23,9 @@ export default function Navbar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            <Link to="/admin">
+            Admin Panel
+            </Link>
           </Typography>
           <Link to="/LoginPage">
           <Button color="inherit">Login</Button>

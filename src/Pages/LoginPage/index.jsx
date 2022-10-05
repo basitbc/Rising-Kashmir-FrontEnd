@@ -84,7 +84,7 @@ export default function LoginPage() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Link to="/loginpage/adminpanel">
+            <Link to="/admin">
             <Button
               type="submit"
               fullWidth
