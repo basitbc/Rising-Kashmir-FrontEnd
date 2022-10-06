@@ -1,42 +1,109 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
+import { Button, Grid, IconButton, Link, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
+import CategoryService from '../../Services/CategoryService';
+import HomeSharpIcon from '@mui/icons-material/HomeSharp';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-export default function Navbar() {
+export default function Navbar({sendCategory}) {
+  const [categories, setCategories] = useState([]);
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const getAllCategories=((e)=>{
+    CategoryService.getCategories()
+    .then((result)=>{
+      setCategories(result.data);
+    }) 
+  });
+
+  useEffect(() => {
+    getAllCategories();
+  },[]);
+  
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link to="/admin">
-            Admin Panel
-            </Link>
-          </Typography>
-          <Link to="/LoginPage">
-          <Button color="inherit">Login</Button>
-          </Link>
-          <Link to="/adminpanel">
-            <button>
-                signin
-            </button>
-            </Link>
-        </Toolbar>
-      </AppBar>
+    <Box>
+    <Box  height={{ xs:"70px", sm: "100px", lg:"140px" }} 
+    sx={{ flexGrow: 1,ml:{sx:"40px", sm:"50px", md:"50px"}, mr:{sx:"40px", sm:"50px", md:"50px"} }}
+    
+    >
+      <Grid container sx={{display:"flex", flexDirection:"row",
+     justifyContent:"center", alignItems:"center", paddingTop:"40px"}}>
+        <Grid item>
+        <img src={require('../../Assets/Logos/rk-logo.png')} alt='logo0'/>
+        </Grid>
+        <Grid item>
+          <Grid container spacing={1} display="flex" ml={"20px"} flexDirection={"row"}>
+          <Grid item>
+            <HomeSharpIcon />
+            </Grid>
+            {categories.slice(0, 5).map((category)=>{
+            return(
+              <Grid item>
+                {/* <Link onClick={()=>{SendNews1(category.categoryId)}}> */}
+              <Button onClick={()=>{sendCategory(category.categoryId)}}  sx={{fontWeight:"bold", fontSize:"17px",wordSpacing:"0px", lineHeight:"21px", color:"black", fontFamily:"roboto", textTransform:"uppercase"}}>{category.categoryName}</Button>
+               
+                {/* </Link> */}
+              </Grid>
+            )})}
+            <Grid item>
+              <Box>
+              <Tooltip title="more">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Typography sx={{fontWeight:"bold", fontSize:"17px",wordSpacing:"0px", lineHeight:"21px", color:"black", fontFamily:"roboto", textTransform:"uppercase"}}>more</Typography>
+                <ArrowDropDownIcon/>
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '15px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'center',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >    
+              {categories.slice(5).map((category) => (
+                <MenuItem key={category.categoryId} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{category.categoryName}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+              </Box>
+            </Grid>
+
+          </Grid>
+
+        </Grid>
+      </Grid>
+    </Box>
+    <Grid container bgcolor={"#C31833"} height="43px"  >
+
+    </Grid>
     </Box>
   );
 }
