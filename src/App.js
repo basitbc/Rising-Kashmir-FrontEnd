@@ -5,9 +5,11 @@ import AddNews from './Components/AddNews';
 import Category from './Components/Category';
 import Location from './Components/Location';
 import Navbar from './Components/Navbar';
+import NavForAdmin from './Components/NavforAdmin';
 import AdminPanel from './Pages/AdminPanel';
 import HomePage from './Pages/HomePage';
 import LoginPage from './Pages/LoginPage';
+import PageNotFound from './Pages/PageNotFound';
 
 
 function App() {
@@ -18,18 +20,30 @@ function App() {
 
   return (
     <BrowserRouter>
-    <Navbar sendCategory={sendCategory} />
+    
    <Routes>
-   <Route exact path='/' element={<HomePage categoryNews={categoryNews}/>}/>
-    
-    <Route path='/loginpage' element={<LoginPage/>}/>
+   <Route exact path='/' element={
+    <>
+   <Navbar sendCategory={sendCategory} />
+   <HomePage categoryNews={categoryNews}/>
+    </>
+   }/>
+    <Route path='/loginpage' element={
+    <>
+    <NavForAdmin/>
+    <LoginPage/>
+    </>
+    }/>
     <Route path='addnews' element={<AddNews  />}/>
-    <Route path="/admin" element={<AdminPanel/>}>
-        <Route path='categories' element={<Category />}/>
-        <Route path='locations' element={<Location/>}/>   
-    </Route>
-    
-    
+    <Route path="/admin" element={
+     <>
+     <NavForAdmin/>
+     <AdminPanel/>
+     </>
+    }/>
+    <Route path='/categories' element={<Category />}/>
+    <Route path='/locations' element={<Location/>}/>   
+    <Route path='/*' element={<PageNotFound/>}/>
     
    </Routes>
    </BrowserRouter>

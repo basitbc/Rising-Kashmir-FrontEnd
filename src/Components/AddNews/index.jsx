@@ -50,8 +50,7 @@ export default function AddNews() {
   const getlocbyid=(()=>{
     LocationService.getLocById(loc).then((res)=>{
       return setNewsLocationn(res.data);
-    })
-    
+    })  
   })
 
   

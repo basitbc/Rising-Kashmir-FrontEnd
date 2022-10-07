@@ -45,7 +45,7 @@ export default function ShowNewsDialog({newsToUpdate, openShowDialog, setOpenSho
           <div  dangerouslySetInnerHTML={{__html: [`<h3>Location: <span class="locationtitle">${locationtitle}</span></h3>`]}}/>
          </DialogContentText>
           </DialogTitle>
-        <DialogContent dividers='paper'>
+        <DialogContent>
          <DialogContentText>
          <div dangerouslySetInnerHTML={{__html: [`<h1>${newsToUpdate.newsTitle}</h1>`]}} /> 
          </DialogContentText>

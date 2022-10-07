@@ -10,22 +10,20 @@
 .descrip-box {
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 7px;
 }
 
 .title2 {
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 7px;
     text-transform: none;
 }
 
 .title21 {
-    overflow: hidden;
+
     text-overflow: ellipsis;
-    padding: 7px 1px 10px 30px;
     text-transform: none;
     white-space: wrap;
+    overflow: hidden;
 
 
 }

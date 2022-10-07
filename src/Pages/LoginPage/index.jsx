@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {useState} from 'react';
 
 
 
@@ -32,14 +33,15 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+    console.log(email);
+  }
+
+  const linkTo = (email === "admin" && password=== "admin")
+    ? `/admin`
+    : `/loginPage`;
 
   return (
     <ThemeProvider theme={theme}>
@@ -65,6 +67,7 @@ export default function LoginPage() {
               required
               fullWidth
               id="email"
+              onChange={(e)=>{setEmail(e.target.value)}}
               label="Email Address"
               name="email"
               autoComplete="email"
@@ -74,6 +77,7 @@ export default function LoginPage() {
               margin="normal"
               required
               fullWidth
+              onChange={(e)=>{setPassword(e.target.value)}}
               name="password"
               label="Password"
               type="password"
@@ -84,7 +88,7 @@ export default function LoginPage() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Link to="/admin">
+            <Link to={linkTo}>
             <Button
               type="submit"
               fullWidth
@@ -96,11 +100,6 @@ export default function LoginPage() {
             </Link>
            
             <Grid container>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
             </Grid>
           </Box>
         </Box>

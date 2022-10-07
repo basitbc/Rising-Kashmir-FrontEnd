@@ -94,7 +94,7 @@ const updateCategory=(categoryId, categoryName)=>{
                   All News
               </Button>
               <br/>
-              <Link to="/addNews" >
+              <Link to="/addNews" style={{textDecoration:"none"}} >
               <Button variant='contained'>
                 Add News
               </Button>
