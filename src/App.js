@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import AddNews from './Components/AddNews';
@@ -10,13 +9,20 @@ import AdminPanel from './Pages/AdminPanel';
 import HomePage from './Pages/HomePage';
 import LoginPage from './Pages/LoginPage';
 import PageNotFound from './Pages/PageNotFound';
+import ShowNewsPage from './Pages/ShowNewsPage';
+import CategoriesPage from './Pages/CategoriesPage';
 
 
 function App() {
-  const [categoryNews, setCategoryNews] = useState("-1")
-   const sendCategory=(categoryId)=>{
-        return setCategoryNews(categoryId);
-  }
+  // const [categoryNews, setCategoryNews] = useState("-1")
+  //  const sendCategory=(categoryId)=>{
+  //       return setCategoryNews(categoryId);
+  // }
+
+  // useEffect(() => {
+  //   console.log(categoryNews, "Appjs");
+  // }, [categoryNews])
+  
 
   return (
     <BrowserRouter>
@@ -24,8 +30,20 @@ function App() {
    <Routes>
    <Route exact path='/' element={
     <>
-   <Navbar sendCategory={sendCategory} />
-   <HomePage categoryNews={categoryNews}/>
+   <Navbar  />
+   <HomePage />
+    </>
+   }/>
+   <Route exact path='/news' element={
+    <>
+   <Navbar  />
+   <ShowNewsPage />
+    </>
+   }/>
+    <Route exact path='/category' element={
+    <>
+   <Navbar />
+   <CategoriesPage />
     </>
    }/>
     <Route path='/loginpage' element={

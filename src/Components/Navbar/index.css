@@ -7,3 +7,23 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+
+.carousel {
+    margin-top: 50px;
+}
+
+.carousel-inner {
+    height: 100px;
+}
+
+.carousel-caption {
+    color: #fff;
+    top: 50%;
+}
+
+
+
+.navtitle:hover {
+    color: blueviolet;
+}

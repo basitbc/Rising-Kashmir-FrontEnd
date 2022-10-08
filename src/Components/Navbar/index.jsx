@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import { Button, Grid, IconButton, Link, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
+import { Button, Grid, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import CategoryService from '../../Services/CategoryService';
 import HomeSharpIcon from '@mui/icons-material/HomeSharp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { Link } from 'react-router-dom';
 
-export default function Navbar({sendCategory}) {
+export default function Navbar() {
   const [categories, setCategories] = useState([]);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -37,7 +38,8 @@ export default function Navbar({sendCategory}) {
   useEffect(() => {
     getAllCategories();
   },[]);
-  
+
+
   return (
     <Box>
     <Box  height={{ xs:"70px", sm: "100px", lg:"140px" }} 
@@ -47,19 +49,24 @@ export default function Navbar({sendCategory}) {
       <Grid container sx={{display:"flex", flexDirection:"row",
      justifyContent:"center", alignItems:"center", paddingTop:"40px"}}>
         <Grid item>
+        <Link to="/" style={{textDecoration:"none", color:"black"}}>
         <img src={require('../../Assets/Logos/rk-logo.png')} alt='logo0'/>
+            </Link>
         </Grid>
         <Grid item>
           <Grid container spacing={1} display="flex" ml={"20px"} flexDirection={"row"}>
           <Grid item>
+            <Link to="/" style={{textDecoration:"none", color:"black"}}>
             <HomeSharpIcon />
+            </Link>
             </Grid>
             {categories.slice(0, 5).map((category)=>{
             return(
               <Grid item>
                 {/* <Link onClick={()=>{SendNews1(category.categoryId)}}> */}
-              <Button onClick={()=>{sendCategory(category.categoryId)}}  sx={{fontWeight:"bold", fontSize:"17px",wordSpacing:"0px", lineHeight:"21px", color:"black", fontFamily:"roboto", textTransform:"uppercase"}}>{category.categoryName}</Button>
-               
+                <Link to="/category" style={{textDecoration:"none"}} state={{data: category}}>
+              <Typography className='navtitle' sx={{fontWeight:"bold", fontSize:"17px",wordSpacing:"0px", lineHeight:"21px", color:"black", fontFamily:"roboto", textTransform:"uppercase"}}>{category.categoryName}</Typography>
+                </Link>
                 {/* </Link> */}
               </Grid>
             )})}
@@ -102,10 +109,10 @@ export default function Navbar({sendCategory}) {
       </Grid>
     </Box>
     <Grid container bgcolor={"#C31833"} height="43px"  >
-
     </Grid>
     </Box>
   );
 }
+
 
 
