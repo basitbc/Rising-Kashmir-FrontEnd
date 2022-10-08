@@ -33,7 +33,9 @@ const CategoriesPage = (props) => {
                     </Grid>
                     <Grid className="categoryBox-title" item height={"83px"} width={"296px"} bgcolor="#FFFFFF" overflow={"hidden"} textOverflow="ellipsis"  margin="-40px 20px 0 20px" >
                         <Grid  item  height={"83px"} width={"296px"} marginTop="10px" textAlign={"center"}  overflow={"hidden"} textOverflow="ellipsis" >
+                        <Link to={"/news"} state={{data: news1}} style={{textDecoration: "none", color:"black"}} >
                     <Typography display={"inline"}  fontSize={"22px"} fontWeight={700} lineHeight="33px" color={"#20247B"}  >{news1.newsTitle}</Typography>
+                        </Link>
                         </Grid>
                          </Grid>
                 </Grid>

@@ -57,8 +57,8 @@ export default function ShowNews({selectedNews}) {
         })
       });
 
-      const DeleteNews=((newsId)=>{
-        ShowNewsServices.deleteNews(newsId).then((e)=>{
+      const DeleteNews1=((news)=>{
+        ShowNewsServices.deleteNews(news.newsId).then((e)=>{
           getallnewss();
         })
     })
@@ -102,7 +102,7 @@ export default function ShowNews({selectedNews}) {
                     {news1.newsId}
                   </StyledTableCell>
                   <StyledTableCell component="th" scope="row" sx={{fontWeight:"900", color:"purple"}}>{news1.newsTitle}</StyledTableCell>
-                  <StyledTableCell>{news1.newsDetails}</StyledTableCell>
+                  <StyledTableCell>{news1.newsTitle}</StyledTableCell>
                   <StyledTableCell sx={{fontWeight:"900", color:"green"}}>{news1.location.locationName}</StyledTableCell>
                   <StyledTableCell align='center' >
                   <Fab onClick={()=>{ShowNews1(news1)}} size='small' color="primary" aria-label="add"  sx={{marginRight:"4px"}}>
@@ -118,11 +118,11 @@ export default function ShowNews({selectedNews}) {
                   <StyledTableCell sx={{fontWeight:"900", color:"purple"}} component="th" scope="row">
                   <Link href="#" onClick={()=>{ShowNews1(news1)}} className='Link' >
                     {news1.newsTitle}</Link></StyledTableCell>
-                  <StyledTableCell>{news1.newsDetails}</StyledTableCell>
+                  <StyledTableCell>{news1.newsTitle}</StyledTableCell>
                   <StyledTableCell sx={{fontWeight:"900", color:"green"}}>{news1.location.locationName}</StyledTableCell>
                   <StyledTableCell align="center">
                   <Grid container spacing={2} display={"flex"} flexDirection="row" wrap='nowrap' >
-                   <Fab  onClick={()=>{DeleteNews(news1)}} size='small' color="primary" aria-label="add"  sx={{marginRight:"4px"}}>
+                   <Fab  onClick={()=>{DeleteNews1(news1)}} size='small' color="primary" aria-label="add"  sx={{marginRight:"4px"}}>
                      <DeleteIcon  />
                       </Fab>
                         <Fab onClick={()=>{UpdateNews(news1)}} size='small' color="secondary" aria-label="edit" sx={{marginRight:"4px"}}>

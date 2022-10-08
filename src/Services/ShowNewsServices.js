@@ -13,13 +13,12 @@ class ShowNewsService {
         return axios.post(`${NEWS_API_BASE_URL}/save`, News);
     }
 
-    deleteNews(NewsId){
-        return axios.delete(`${NEWS_API_BASE_URL}/delete` + "/" + NewsId);
+    deleteNews(NewsIdd){
+        console.log(NewsIdd, "delete news Id")
+        return axios.delete(`${NEWS_API_BASE_URL}/delete` + "/" + NewsIdd);
     }
 
     updateNews(newsId, news){
-        console.log(newsId, "API");
-        console.log(news,"Api")
         return axios.put(`${NEWS_API_BASE_URL}/update`+ "/" + newsId, news);
     }
 }

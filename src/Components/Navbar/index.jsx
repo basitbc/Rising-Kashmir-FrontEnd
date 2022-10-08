@@ -42,12 +42,21 @@ export default function Navbar() {
 
   return (
     <Box>
-    <Box  height={{ xs:"70px", sm: "100px", lg:"140px" }} 
+      <Grid item >
+      <Typography marginLeft={"200px"} marginTop={"10px"}  fontFamily={"poppins"} fontSize="15px" color="#5B5B5B">
+        <Link to="/loginpage" style={{textDecoration:"none", color:"#5B5B5B"}}>
+        AdminPanel 
+        </Link>
+        <span>  | Our Team | E-paper | Contact Us  </span>
+      </Typography>
+       
+      </Grid>
+    <Box  height={{ xs:"70px", sm: "100px", lg:"115px" }} 
     sx={{ flexGrow: 1,ml:{sx:"40px", sm:"50px", md:"50px"}, mr:{sx:"40px", sm:"50px", md:"50px"} }}
     
     >
       <Grid container sx={{display:"flex", flexDirection:"row",
-     justifyContent:"center", alignItems:"center", paddingTop:"40px"}}>
+     justifyContent:"center", alignItems:"center", paddingTop:"20px"}}>
         <Grid item>
         <Link to="/" style={{textDecoration:"none", color:"black"}}>
         <img src={require('../../Assets/Logos/rk-logo.png')} alt='logo0'/>
@@ -55,7 +64,7 @@ export default function Navbar() {
         </Grid>
         <Grid item>
           <Grid container spacing={1} display="flex" ml={"20px"} flexDirection={"row"}>
-          <Grid item>
+          <Grid item paddingRight={"10px"} >
             <Link to="/" style={{textDecoration:"none", color:"black"}}>
             <HomeSharpIcon />
             </Link>
@@ -65,7 +74,7 @@ export default function Navbar() {
               <Grid item>
                 {/* <Link onClick={()=>{SendNews1(category.categoryId)}}> */}
                 <Link to="/category" style={{textDecoration:"none"}} state={{data: category}}>
-              <Typography className='navtitle' sx={{fontWeight:"bold", fontSize:"17px",wordSpacing:"0px", lineHeight:"21px", color:"black", fontFamily:"roboto", textTransform:"uppercase"}}>{category.categoryName}</Typography>
+              <Typography className='navtitle' paddingRight={"10px"} sx={{fontWeight:"bold", fontSize:"17px",wordSpacing:"0px", lineHeight:"21px", color:"black", fontFamily:"roboto", textTransform:"uppercase"}}>{category.categoryName}</Typography>
                 </Link>
                 {/* </Link> */}
               </Grid>

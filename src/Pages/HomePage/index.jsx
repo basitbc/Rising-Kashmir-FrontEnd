@@ -26,7 +26,7 @@ const HomePage = () => {
            {news.slice(0,1).map((n)=>{
                     return(
                       <> 
-               <Grid container>
+               <Grid container >
                    <Grid item sx={{width:"550px", height:"400px", border:"1px solid orange"}} >
                     <img sx={{objectFit:"cover"}} width="550px" height="400px" src={n.newsDetails}
                     alt='News Pic'
@@ -100,7 +100,7 @@ const HomePage = () => {
                           news.slice(0,8).map((n1)=>{
                             return(
     <>
-                <Grid item sx={{width:"260px", height:"75px" , margin:"0 0px 15px 0px",padding:"0 5px 0 15px"}} >
+                <Grid item sx={{width:"260px", height:"75px" , margin:"0 0px 15px 0px",padding:"0 5px 0 15px"}}  >
                   <Grid container  >
                   <Grid item sx={{width:"100px", height:"75px" , overflow:"hidden", textOverflow:"ellipsis"}} >
                   <img sx={{objectFit:"cover"}} width="100px" height="75px" src={n1.newsDetails}/>

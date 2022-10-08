@@ -38,6 +38,7 @@ const UpdateDialog = ({openUpdateDialog,setOpenUpdateDialog, newsToUpdate}) => {
 
   const getlocbyid=(()=>{
     LocationService.getLocById(loc).then((res)=>{
+      console.log(res, "location error")
       return setNewsLocationn(res.data);
     })
     
@@ -144,9 +145,7 @@ const updateNews1=(()=>{
             fullWidth
             helpertext="Please Select the category"
             >
-          <MenuItem selected value="None">
-            <em>None</em>
-          </MenuItem>
+
           {categories.map(category1=>{
             return(
             <MenuItem key={category1.categoryId} value={category1.categoryId} >{category1.categoryName} </MenuItem>

@@ -12,7 +12,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useEffect, useState } from 'react';
-import { MenuItem, Select } from '@mui/material';
+import { Alert, MenuItem, Select } from '@mui/material';
 import LocationService from '../../Services/LocationService';
 import CategoryService from '../../Services/CategoryService';
 import ShowNewsServices from '../../Services/ShowNewsServices';
@@ -84,11 +84,14 @@ export default function AddNews() {
 
 
   const SubmitNews=(()=>{
-    ShowNewsServices.addNews(news1);
+    ShowNewsServices.addNews(news1).then((e)=>{
+    
+      
+    })
+
   })
 
   const value1 = newsLocationn.locationId;
-
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="lg"  sx={{border:"3px solid blue", marginTop:"20px"}}>
