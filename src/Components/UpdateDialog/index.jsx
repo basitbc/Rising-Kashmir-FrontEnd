@@ -65,7 +65,6 @@ const UpdateDialog = ({openUpdateDialog,setOpenUpdateDialog, newsToUpdate}) => {
 }
 const updateNews1=(()=>{
    ShowNewsServices.updateNews(newsToUpdate.newsId,news1).then((e)=>{
-    console.log("Submitted");
    })
 })
 
@@ -125,12 +124,9 @@ const updateNews1=(()=>{
               onChange={handleChangeLoc}
               fullWidth
               >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
           {locations.map(location1=>{
             return(
-            <MenuItem key={location1.locationId} value={location1.locationId}>{location1.locationName} </MenuItem>
+            <MenuItem key={location1} value={location1.locationId}>{location1.locationName} </MenuItem>
             )
           })} 
         </Select>

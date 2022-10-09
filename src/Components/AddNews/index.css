@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&display=swap');
+
+.SuccessDialog {
+    min-width: 400px;
+    height: 110px;
+    background-color: #93ed0cb3;
+    align-items: center;
+    justify-content: center;
+
+}

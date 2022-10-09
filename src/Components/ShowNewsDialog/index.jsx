@@ -16,7 +16,6 @@ export default function ShowNewsDialog({newsToUpdate, openShowDialog, setOpenSho
   
   const handleClose = () => {
     setOpenShowDialog(false);
-    console.log(newsToUpdate.location.locationName," Show Location");
   };
 
   const locationtitle = (newsToUpdate.location==null ? " " : newsToUpdate.location.locationName );
@@ -42,15 +41,15 @@ export default function ShowNewsDialog({newsToUpdate, openShowDialog, setOpenSho
       >
         <DialogTitle id="scroll-dialog-title">   
           <DialogContentText>
-          <div  dangerouslySetInnerHTML={{__html: [`<h3>Location: <span class="locationtitle">${locationtitle}</span></h3>`]}}/>
+          <span  dangerouslySetInnerHTML={{__html: [`<h3>Location: <span class="locationtitle">${locationtitle}</span></h3>`]}}/>
          </DialogContentText>
           </DialogTitle>
         <DialogContent>
          <DialogContentText>
-         <div dangerouslySetInnerHTML={{__html: [`<h1>${newsToUpdate.newsTitle}</h1>`]}} /> 
+         <span dangerouslySetInnerHTML={{__html: [`<h1>${newsToUpdate.newsTitle}</h1>`]}} /> 
          </DialogContentText>
          <DialogContentText>
-         <div dangerouslySetInnerHTML={{__html: [`${newsToUpdate.newsDescription}`]}} /> 
+         <span dangerouslySetInnerHTML={{__html: [`${newsToUpdate.newsDescription}`]}} /> 
           </DialogContentText>
         </DialogContent>
         <DialogActions>

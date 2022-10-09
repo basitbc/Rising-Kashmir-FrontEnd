@@ -8,6 +8,7 @@ import { faEdit, faTrash } from '@fortawesome/fontawesome-free-solid'
 import CategoryService from '../../Services/CategoryService'
 import ShowNews from '../ShowNews'
 import { Link } from 'react-router-dom'
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 
 const Category = () => {
@@ -17,13 +18,17 @@ const Category = () => {
   const [openUpdateDialog, setOpenUpdateDialog] = useState(false)
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
-  
+  const [isActive, setIsActive] = useState("-1");
+
+
   const addCategory=(e)=>{
     e.preventDefault()
     const newcategory = {"categoryName": category};
     CategoryService.addCategory(newcategory).then((e)=>{getdata()});
     setOpenAddDialog(false);
   }
+
+
 const deleteCategory=(id)=>{
   try {
     CategoryService.deleteCategory(id).then((e)=>{getdata()});
@@ -48,6 +53,17 @@ const updateCategory=(categoryId, categoryName)=>{
     getdata();
   },[]);
   
+  const handleClickCategory = ((categoryId)=>{
+    setIsActive(categoryId);
+    setSelectedNews(categoryId);
+  })
+
+  const handleClickAllNews =((categoryId)=>{
+    setIsActive("-1");
+    setSelectedNews("-1");
+  })
+
+
 
   const handleClickOpen = () => {
     setOpenAddDialog(true);
@@ -87,26 +103,31 @@ const updateCategory=(categoryId, categoryName)=>{
       </Grid>
         
         <Grid container sx={{overflowX:"scroll"}} height="150px" backgroundColor="#F7CAC9">
-    <Stack m={2} gap={2} direction="row" justifyContent="start" >
-    <Card key={catg.categoryId} sx={{backgroundColor:"#6B5B95", minWidth:"250px", height:"100px"}}>
-          <CardContent>
-              <Button onClick={() => setSelectedNews("-1")} className='textCategories' color={"whitesmoke"} fontFamily={'Ubuntu'}  variant='h5'>
+    <Stack m={1} gap={1} direction="row" justifyContent="start" >
+    <Card key={catg.categoryId} 
+    sx={{backgroundColor: isActive === "-1"  ? '#e1b382' : "#6B5B95",
+    boxShadow: isActive === "-1"  ? 'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;' : "",
+     minWidth:"250px", height:"100px"}}>
+          <CardContent sx={{margin:"0", padding:"5px 16px 1px 16px",paddingBottom:"1px"}}>
+              <Typography  onClick={() => handleClickAllNews(catg.categoryId)} sx={{color: isActive === "-1"  ? 'white' : "white", fontWeight: isActive === "-1"  ? '900' : ""}} className='textCategories'   variant='h5'>
                   All News
-              </Button>
+              </Typography>
               <br/>
               <Link to="/addNews" style={{textDecoration:"none"}} >
-              <Button variant='contained'>
-                Add News
-              </Button>
+              <Grid container sx={{ justifyContent:"center", height:"auto"}}>
+      <AddCircleIcon fontSize='large' color='error' sx={{fontSize:"50px", padding:"0 0 10px 0"}} />
+    </Grid>
               </Link>
           </CardContent>
       </Card>
         {categories.map(catg=>(
-          <Card  key={catg.categoryId} sx={{backgroundColor:"#6B5B95", minWidth:"250px", height:"100px"}}>
+          <Card  key={catg.categoryId} sx={{backgroundColor: isActive === catg.categoryId  ? '#e1b382' : "#6B5B95",
+          boxShadow: isActive === catg.categoryId  ? 'rgba(0, 0, 0, 0.7) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;' : "",
+          minWidth:"250px", height:"100px"}}>
           <CardContent>
-              <Button onClick={() => setSelectedNews(catg.categoryId)} className='textCategories' color={"whitesmoke"} fontFamily={'Ubuntu'}  variant='h5'>
+              <Typography onClick={() => handleClickCategory(catg.categoryId)} sx={{color: isActive === catg.categoryId  ? 'white' : "white", fontWeight: isActive === catg.categoryId  ? '900' : ""}} className='textCategories'  variant='h5'>
                   {catg.categoryName}
-              </Button>
+              </Typography>
               <Typography mt={2}  variant='h6'>
                 <Stack direction="row" spacing={2} justifyContent="center">
                 <FontAwesomeIcon onClick={()=>handleClickOpenUpdateDialog(catg)} className='Edit'  cursor={'pointer'} color='#7FCDCD' icon={faEdit} />

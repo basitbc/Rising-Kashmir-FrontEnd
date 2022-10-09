@@ -12,10 +12,13 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useEffect, useState } from 'react';
-import { Alert, MenuItem, Select } from '@mui/material';
+import { Alert, Dialog, MenuItem, Select } from '@mui/material';
 import LocationService from '../../Services/LocationService';
 import CategoryService from '../../Services/CategoryService';
 import ShowNewsServices from '../../Services/ShowNewsServices';
+import Slide from '@mui/material/Slide';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import "./index.css"
 const theme = createTheme();
 
 export default function AddNews() {
@@ -31,8 +34,20 @@ export default function AddNews() {
   const [locations, setLocations] = useState([{}]);
   const [categories, setCategories] = useState([]);
   const [loc, setloc] = useState("");
+  const [open, setopen] = useState(false);
 
+
+  const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
+
+  const handleOpen=(()=>{
+    setopen(true);
+  })
   
+  const handleClose=(()=>{
+setopen(false);
+  })
 
   const getLocationData=(()=>{
     LocationService.getLocations() 
@@ -85,7 +100,7 @@ export default function AddNews() {
 
   const SubmitNews=(()=>{
     ShowNewsServices.addNews(news1).then((e)=>{
-    
+    handleOpen();
       
     })
 
@@ -188,6 +203,28 @@ export default function AddNews() {
             </Button>
         </Box>
       </Container>
+      <Dialog
+      open={open}  
+      Maxwidth="lg"
+      TransitionComponent={Transition}
+      keepMounted
+      onClose={handleClose}
+      overlayStyle={{backgroundColor: 'transparent'}}
+      aria-describedby="alert-dialog-slide-description"
+      PaperProps={{
+        style: {
+          backgroundColor: 'transparent',
+          boxShadow: 'none',
+        },
+      }}
+      >
+        <Grid container className="SuccessDialog" display={"flex"} flexDirection="column" >
+        <CheckCircleIcon color='success' fontSize='large'/>
+          <Typography font-family= "'Lato', sans-serif" fontWeight={"300"} fontSize="20px">
+            News Added Successfully
+          </Typography>
+        </Grid>
+      </Dialog>
     </ThemeProvider>
   );
 }

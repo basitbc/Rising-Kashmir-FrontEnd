@@ -104,9 +104,11 @@ export default function Navbar() {
               onClose={handleCloseUserMenu}
             >    
               {categories.slice(5).map((category) => (
+                  <Link to="/category" style={{textDecoration:"none", color:"black"}} state={{data: category}}>
                 <MenuItem key={category.categoryId} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{category.categoryName}</Typography>
                 </MenuItem>
+                  </Link>
               ))}
             </Menu>
               </Box>

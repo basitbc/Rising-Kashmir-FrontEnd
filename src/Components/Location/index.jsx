@@ -21,29 +21,37 @@ const Location = () => {
   const addLocation=(e)=>{
     e.preventDefault()
     const newlocation = {"locationName": location};
-    LocationService.addLocation(newlocation).catch((e)=>console.log(e, "addError"));;
+    LocationService.addLocation(newlocation).catch((e)=>console.log(e, "addError")).then(()=>{
+      getallLocations();
+    })
     setOpenAddDialog(false);
     setLocation("");
   }
 
   const updateLocation=(locationId, locationName)=>{
-    LocationService.updateLocation(locationId,locationName).catch((e)=>console.log(e, "UpdateError"));
+    LocationService.updateLocation(locationId,locationName).catch((e)=>console.log(e, "UpdateError")).then(()=>{
+      getallLocations();
+    })
     handleCloseUpdateDialog();
     setLocation("");
 
   }
 
   const deleteLocation=(id)=>{
-      return LocationService.deleteLocation(id);
+      return LocationService.deleteLocation(id).then(()=>{
+        getallLocations();
+      })
   }
   
-  
-
-  useEffect(() => {
+  const getallLocations=(()=>{
     LocationService.getLocations() 
     .then((res)=>{
       setLocations(res.data);
     })
+  })
+
+  useEffect(() => {
+    getallLocations();
   },[]); 
 
 

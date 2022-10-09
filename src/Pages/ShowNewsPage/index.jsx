@@ -78,13 +78,14 @@ const ShowNewsPage = (props) => {
                 </Grid>
                             )
                         }
-                        return("")
+                        return(" No news Found")
                     })}
                 
                 
                 
             </Grid>
             </Grid>
+
         </Grid>
 
 

@@ -72,7 +72,6 @@ export default function ShowNews({selectedNews}) {
     const ShowNews1=((news1)=>{
       setNewstoUpdate(news1);
       setOpenShowDialog(true);
-      console.log(news1, "News Showed")
     })
 
 
