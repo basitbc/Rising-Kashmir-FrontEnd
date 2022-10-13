@@ -11,6 +11,7 @@ class LocationService {
     }
 
     getLocById(Id){
+        console.log(Id, "Services");
         return axios.get(`${LOCATION_API_BASE_URL}/getbyid`+ "/" + Id);
         
     }

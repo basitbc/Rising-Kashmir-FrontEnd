@@ -7,7 +7,7 @@ const ShowNewsPage = (props) => {
     const [news, setNews] = useState([]);
     const location = useLocation();
     const newsToShow = location.state?.data;
-    console.log(newsToShow , " useLocation Hook");
+    
 
     useEffect(() => {
         getallnewss()
@@ -36,7 +36,7 @@ const ShowNewsPage = (props) => {
        <img src={newsToShow.newsDetails} alt='HeaderImage'/>
                 </Grid>
                 <Grid overflow={"hidden"} textOverflow="ellipsis" item className='left-des'>
-                <Typography fontSize={"22px"} fontWeight="500" font-family= "Georgia,Times,Times New Roman,serif"  lineHeight={"33px"}><div dangerouslySetInnerHTML={{__html: [`${newsToShow.newsDescription}`]}} /> </Typography>
+                <Typography fontSize={"22px"} fontWeight="500" fontFamily= "Georgia,Times,Times New Roman,serif"  lineHeight={"33px"}><span dangerouslySetInnerHTML={{__html: [`${newsToShow.newsDescription}`]}} /> </Typography>
                 </Grid>
             </Grid> 
         </Grid>
@@ -53,7 +53,7 @@ const ShowNewsPage = (props) => {
             {news.map((news1)=>{
                         if(news){
                             return(
-                 <Grid container className='right-inner-box' >
+                 <Grid key={news1.newsId} container className='right-inner-box' >
                 <Grid item className='right-i-leftbox'>
                 <Grid item className='right-title'>
                 <Link to={"/news"} state={{data: news1}} style={{textDecoration: "none", color:"black"}} >

@@ -14,7 +14,6 @@ class ShowNewsService {
     }
 
     deleteNews(NewsIdd){
-        console.log(NewsIdd, "delete news Id")
         return axios.delete(`${NEWS_API_BASE_URL}/delete` + "/" + NewsIdd);
     }
 

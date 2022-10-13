@@ -19,14 +19,19 @@ const HomePage = () => {
       setNews(res.data);
     })
   });
+  <noscript>
+    <iframe
+src="https://www.googletagmanager.com/ns.html?id=GTM-MCSNBR" height="0" width="0" style={{display:"none", visibility:"hidden"}}>
+  </iframe>
+  </noscript>
   return (
-    <>
+    <>    
     <Grid container sx={{width:"1200px", height:"653px", margin:"25px 120px 0 120px"}}>
            <Grid item sx={{width:"580px", height:"633px" , padding:"0 15px 0 15px"}} >
            {news.slice(0,1).map((n)=>{
                     return(
-                      <> 
-               <Grid container >
+                      <Grid key={n.newsId}> 
+               <Grid key={n.newsId} container >
                    <Grid item sx={{width:"550px", height:"400px", border:"1px solid orange"}} >
                     <img sx={{objectFit:"cover"}} width="550px" height="400px" src={n.newsDetails}
                     alt='News Pic'
@@ -45,11 +50,11 @@ const HomePage = () => {
                     </Grid>
                     <Grid item className="descrip-box"sx={{width:"563px", height:"110px" , margin:"0 0 15px 0"}} >
                     <Typography
-                    sx={{fontSize:"15px", lineHeight:"30px", display:"inline"}}><div  dangerouslySetInnerHTML={{__html: [`${n.newsDescription}`]}}/></Typography>
+                    sx={{fontSize:"15px", lineHeight:"30px", display:"inline"}}><span  dangerouslySetInnerHTML={{__html: [`${n.newsDescription}`]}}/></Typography>
                     
                     </Grid>
                     </Grid>
-                    </>
+                    </Grid>
                      )
                     }
                       )}
@@ -57,8 +62,8 @@ const HomePage = () => {
         <Grid item sx={{width:"590px", height:"633px" , padding:"0 0px 0 0px"}} >
         {news.slice(7,8).map((n)=>{
                     return(
-                      <> 
-               <Grid item sx={{width:"540px", height:"185px" , margin:"0 5px 10px 5px",display:"flex", flexDirection:"row"}} >
+                      <Grid key={n.newsId}> 
+               <Grid  item sx={{width:"540px", height:"185px" , margin:"0 5px 10px 5px",display:"flex", flexDirection:"row"}} >
                <Grid item sx={{width:"270px", height:"185px" , padding:"0 15px 0px 15px"}} >
                <Grid item sx={{width:"240px", height:"185px" }} >
                       <img sx={{objectFit:"cover"}} width="240px" height="185px" src={n.newsDetails}/>
@@ -69,14 +74,14 @@ const HomePage = () => {
                       <Grid item className='title2' sx={{width:"240px", height:"86px" ,margin:"0 0 8px 0"}} >
                       <Link to={"/news"} state={{data: n}} style={{textDecoration: "none", color:"black"}} >
                     <Typography 
-                    sx={{fontSize:"24px",height:"auto", width:"auto", lineHeight:"28px",fontWeight:700, display:"inline"}}><div  dangerouslySetInnerHTML={{__html: [`${n.newsTitle}`]}}/></Typography>
+                    sx={{fontSize:"24px",height:"auto", width:"auto", lineHeight:"28px",fontWeight:700, display:"inline"}}>{n.newsTitle}</Typography>
                    </Link>
 
                       </Grid>
                       <Grid item  className='title21' sx={{width:"240px", height:"84px" }} >
                       <Link to={"/news"} state={{data: n}} style={{textDecoration: "none", color:"black"}} >
                       <Typography 
-                    sx={{fontSize:"15px",lineHeight:"20px",height:"auto", width:"auto", display:"inline"}}><div  dangerouslySetInnerHTML={{__html: [`${n.newsDescription}`]}}/></Typography>
+                    sx={{fontSize:"15px",lineHeight:"20px",height:"auto", width:"auto", display:"inline"}}><span  dangerouslySetInnerHTML={{__html: [`${n.newsDescription}`]}}/></Typography>
                    </Link>
                       </Grid>
                      
@@ -84,7 +89,7 @@ const HomePage = () => {
                       </Grid>
                       
               </Grid>
-              </>
+              </Grid>
               )
              }
                )}
@@ -99,8 +104,8 @@ const HomePage = () => {
                 {
                           news.slice(0,8).map((n1)=>{
                             return(
-    <>
-                <Grid item sx={{width:"260px", height:"75px" , margin:"0 0px 15px 0px",padding:"0 5px 0 15px"}}  >
+    <Grid key={n1.newsId}  >
+                <Grid key={n1.newsId} item sx={{width:"260px", height:"75px" , margin:"0 0px 15px 0px",padding:"0 5px 0 15px"}}  >
                   <Grid container  >
                   <Grid item sx={{width:"100px", height:"75px" , overflow:"hidden", textOverflow:"ellipsis"}} >
                   <img sx={{objectFit:"cover"}} width="100px" height="75px" src={n1.newsDetails}/>
@@ -110,13 +115,13 @@ const HomePage = () => {
                               <Grid item sx={{width:"122px", height:"67px" ,margin:"4px 0 4px 15px",  overflow:"hidden", textOverflow:"ellipsis"}} >
                               <Link to={"/news"} state={{data: n1}} style={{textDecoration: "none", color:"black"}} >
                                    <Typography 
-                    sx={{fontSize:"14px",height:"auto", width:"auto", lineHeight:"16.8px",fontWeight:700, display:"inline"}}><div  dangerouslySetInnerHTML={{__html: [`${n1.newsTitle}`]}}/></Typography>
+                    sx={{fontSize:"14px",height:"auto", width:"auto", lineHeight:"16.8px",fontWeight:700, display:"inline"}}>{n1.newsTitle}</Typography>
                    </Link>
                                </Grid>   
                   </Grid>
                   </Grid>
                   </Grid>
-                  </>
+                  </Grid>
                 )
               })
             }

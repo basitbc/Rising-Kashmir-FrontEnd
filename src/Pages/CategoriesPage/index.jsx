@@ -7,7 +7,6 @@ const CategoriesPage = (props) => {
     const [news, setNews] = useState([]);
     const location = useLocation();
     const newsToShow = location.state?.data;
-    console.log(newsToShow , " useLocation NEWS TO SHOW");
 
     useEffect(() => {
         getallnewss()
@@ -27,9 +26,9 @@ const CategoriesPage = (props) => {
                 {news.map(news1=>{
                     if(news1.categoryId === newsToShow.categoryId){
                         return(
-                    <Grid className="categoryBox" container height={"353px"} width={"336px"} margin={"15px 10px 15px 10px"}   borderRadius={"10px"}>
-                    <Grid item height={"300px"} width={"336px"}  borderRadius={"10px"}>
-                        <img sx={{objectFit:"cover"}}  src={news1.newsDetails} alt="NewsPic" height="100%" width="100%" borderRadius={"10px"} />
+                    <Grid key={news1.newsId} className="categoryBox" container height={"353px"} width={"336px"} margin={"15px 10px 15px 10px"}  sx={{borderRadius:"10px"}} >
+                    <Grid item height={"300px"} width={"336px"} sx={{borderRadius:"10px"}}>
+                        <img sx={{objectFit:"cover",borderRadius:"10px"}}  src={news1.newsDetails} alt="NewsPic" height="100%" width="100%" />
                     </Grid>
                     <Grid className="categoryBox-title" item height={"83px"} width={"296px"} bgcolor="#FFFFFF" overflow={"hidden"} textOverflow="ellipsis"  margin="-40px 20px 0 20px" >
                         <Grid  item  height={"83px"} width={"296px"} marginTop="10px" textAlign={"center"}  overflow={"hidden"} textOverflow="ellipsis" >
@@ -62,7 +61,7 @@ const CategoriesPage = (props) => {
             {news.map((news1)=>{
                         if(news){
                             return(
-                 <Grid container className='right-inner-box' >
+                 <Grid key={news1.newsId} container className='right-inner-box' >
                 <Grid item className='right-i-leftbox'>
                 <Grid item className='right-title'>
                 <Link to={"/news"} state={{data: news1}} style={{textDecoration: "none", color:"black"}} >

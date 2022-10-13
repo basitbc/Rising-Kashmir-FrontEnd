@@ -113,19 +113,19 @@ setopen(false);
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 1,
+            marginTop: "1px",
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main', fontSize:"30px" }}>
+          <Avatar sx={{ m: 1, bgcolor: 'secondary', fontSize:"30px" }}>
             <FeedIcon  />
           </Avatar>
           <Typography component="h1" variant="h5">
             Add News
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3, minHeight:"500px" }}>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: "px", minHeight:"500px" }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -150,44 +150,51 @@ setopen(false);
                 />
               </Grid>
               <Grid item xs={6}>
-
+                
 
           {/* Select Option for Categories */}
               <Select
+              defaultValue='none'
               label="Select Location"
+              displayEmpty
               value={loc}
               onChange={handleChangeLoc}
               fullWidth
               >
-          <MenuItem value={value1}>
-            <em>None</em>
-          </MenuItem>
+                <MenuItem value="none" disabled selected>
+              Select Location
+              </MenuItem>
           {locations.map(location1=>{
             return(
-            <MenuItem key={location1.locationId} value={location1.locationId}>{location1.locationName} </MenuItem>
+            <MenuItem key={location1} value={location1.locationId}>{location1.locationName} </MenuItem>
             )
           })} 
         </Select>
 
+        
+        </Grid>
+        <Grid item xs={12} sm={6}>
+
+       
         {/* Select Option for Categories */}
         <Select
             label="Select Category"
             value={newsCategoriess}
             onChange={handleChangeCat}
             fullWidth
-            helpertext="Please Select the category"
             >
-          <MenuItem value="None">
-            <em>None</em>
-          </MenuItem>
+              <MenuItem value="none" disabled selected>
+              Select Category
+              </MenuItem>
           {categories.map(category1=>{
             return(
             <MenuItem key={category1.categoryId} value={category1.categoryId} >{category1.categoryName} </MenuItem>
             )
           })} 
         </Select>
-              </Grid>
-                <Grid item sx={12}>
+        </Grid>
+              
+                <Grid item>
             <ReactQuill theme="snow"  value={newsDescriptionn} onChange={setNewsDescriptionn} style={{height:"300px",width:"1160px", overflow:"inherit"}} />
                 </Grid>
               </Grid>
@@ -205,22 +212,20 @@ setopen(false);
       </Container>
       <Dialog
       open={open}  
-      Maxwidth="lg"
       TransitionComponent={Transition}
       keepMounted
       onClose={handleClose}
-      overlayStyle={{backgroundColor: 'transparent'}}
       aria-describedby="alert-dialog-slide-description"
       PaperProps={{
         style: {
           backgroundColor: 'transparent',
           boxShadow: 'none',
-        },
+        }
       }}
       >
         <Grid container className="SuccessDialog" display={"flex"} flexDirection="column" >
         <CheckCircleIcon color='success' fontSize='large'/>
-          <Typography font-family= "'Lato', sans-serif" fontWeight={"300"} fontSize="20px">
+          <Typography fontFamily= "'Lato', sans-serif" fontWeight={"300"} fontSize="20px">
             News Added Successfully
           </Typography>
         </Grid>

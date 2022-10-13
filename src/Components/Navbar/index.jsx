@@ -71,7 +71,7 @@ export default function Navbar() {
             </Grid>
             {categories.slice(0, 5).map((category)=>{
             return(
-              <Grid item>
+              <Grid key={category.categoryId} item>
                 {/* <Link onClick={()=>{SendNews1(category.categoryId)}}> */}
                 <Link to="/category" style={{textDecoration:"none"}} state={{data: category}}>
               <Typography className='navtitle' paddingRight={"10px"} sx={{fontWeight:"bold", fontSize:"17px",wordSpacing:"0px", lineHeight:"21px", color:"black", fontFamily:"roboto", textTransform:"uppercase"}}>{category.categoryName}</Typography>
@@ -104,8 +104,8 @@ export default function Navbar() {
               onClose={handleCloseUserMenu}
             >    
               {categories.slice(5).map((category) => (
-                  <Link to="/category" style={{textDecoration:"none", color:"black"}} state={{data: category}}>
-                <MenuItem key={category.categoryId} onClick={handleCloseUserMenu}>
+                  <Link key={category.categoryId} to="/category" style={{textDecoration:"none", color:"black"}} state={{data: category}}>
+                <MenuItem  onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{category.categoryName}</Typography>
                 </MenuItem>
                   </Link>
